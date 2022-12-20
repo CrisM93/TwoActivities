@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
+//Estoy en la RAMA MASTER____________
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.twoactivities.extra.MESSAGE";
     private static final String LOG_TAG =MainActivity.class.getSimpleName();
