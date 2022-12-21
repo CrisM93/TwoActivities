@@ -14,14 +14,16 @@ public class SecondActivity extends AppCompatActivity {
     private static final String LOG_TAG = SecondActivity.class.getSimpleName();
     private EditText mReply;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//aqui se recupera el intent, si le pasan extras
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         mReply = findViewById(R.id.editText_second);
-        Intent intent = getIntent();
+        Intent intent = getIntent();//validar si no es nulo
+        if(intent != null && intent.hasExtra(MainActivity.EXTRA_MESSAGE) ){
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.text_message);
         textView.setText(message);
+        }
     }//termina onCreate
     @Override
     public void onStart(){

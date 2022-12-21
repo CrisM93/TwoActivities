@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 //Dos Actividades, en RAMA....
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int TEXT_REQUEST = 1;
     private TextView mReplyHeadTextView;
     private TextView mReplyTextView;
-
+    private Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,19 @@ public class MainActivity extends AppCompatActivity {
         mReplyHeadTextView = findViewById(R.id.text_header_reply);
         mReplyTextView = findViewById(R.id.text_message_reply);
 
+        button2=findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(LOG_TAG, "Button clicked-----------------------!");
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                String mensajeaenviar = mMessageEditText.getText().toString();
+                intent.putExtra(EXTRA_MESSAGE, mensajeaenviar);
+                startActivityForResult(intent, TEXT_REQUEST);
+
+            }
+        });
+        button2.setText("enviar");
         if (savedInstanceState != null) {
             boolean isVisible =savedInstanceState.getBoolean("reply_visible");
             if (isVisible) {
@@ -82,13 +97,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "onDestroy");
     }
 
-    public void launchSecondActivity(View view) {
-        Log.d(LOG_TAG, "Button clicked-----------------------!");
-        Intent intent = new Intent(this, SecondActivity.class);
-        String mensajeaenviar = mMessageEditText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, mensajeaenviar);
-        startActivityForResult(intent, TEXT_REQUEST);
-    }
     @Override
     public void onActivityResult(int requestCode,int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -101,5 +109,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
 }
